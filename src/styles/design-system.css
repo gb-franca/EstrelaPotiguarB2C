@@ -1,0 +1,135 @@
+:root {
+  /* Colors */
+  --ep-night-950: #07061d;
+  --ep-night-900: #0a0930;
+  --ep-night-800: #0d0b3b;
+  --ep-night-700: #100f46;
+  --ep-night-600: #191760;
+  --ep-night-500: #252178;
+  --ep-night-400: #383293;
+  --ep-night-300: #534caf;
+
+  --ep-star-100: #fffbe3;
+  --ep-star-200: #fff3a8;
+  --ep-star-300: #fbe96b;
+  --ep-star-400: #f8de22;
+  --ep-star-500: #e6c70f;
+  --ep-star-600: #bfa406;
+
+  --ep-sand-50:  #faf6ef;
+  --ep-sand-100: #f3ecdf;
+  --ep-sand-200: #e9e0d2;
+  --ep-sand-300: #d6c9b4;
+  --ep-sand-400: #b8a987;
+  --ep-sand-500: #8f8062;
+
+  --ep-aurora-300: #fa9af4;
+  --ep-aurora-400: #f637ec;
+  --ep-aurora-500: #c819c0;
+
+  --ep-mare-300: #c2f07e;
+  --ep-mare-400: #96df29;
+  --ep-mare-500: #74b417;
+
+  --ep-coral-400: #ff6b5e;
+  --ep-azure-400: #4ad1ff;
+  --ep-black: #050414;
+  --ep-white: #ffffff;
+
+  /* Theme mappings (Dark by default) */
+  --surface-canvas:      var(--ep-night-950);
+  --surface-base:        var(--ep-night-900);
+  --surface-card:        var(--ep-night-700);
+  --surface-raised:      var(--ep-night-600);
+  --surface-inset:       var(--ep-night-800);
+  --surface-overlay:     rgba(7, 6, 29, 0.72);
+
+  --map-canvas:          #060a24;
+  --text-primary:        var(--ep-sand-100);
+  --text-secondary:      rgba(233, 224, 210, 0.72);
+  --text-muted:          rgba(233, 224, 210, 0.45);
+  --text-on-accent:      var(--ep-night-900);
+  --border-subtle:       rgba(233, 224, 210, 0.12);
+  --border-default:      rgba(233, 224, 210, 0.20);
+  --border-focus:        var(--ep-star-400);
+  --accent:              var(--ep-star-400);
+  --accent-hover:        var(--ep-star-300);
+  --accent-soft:         rgba(248, 222, 34, 0.16);
+  --on-accent:           var(--ep-night-900);
+  --aurora:              var(--ep-aurora-400);
+  --mare:                var(--ep-mare-400);
+
+  /* Typography */
+  --font-display: 'Noto Serif EP', 'Noto Serif', Georgia, 'Times New Roman', serif;
+  --font-body:    'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-italic:  'Roboto EP', 'Roboto', system-ui, sans-serif;
+
+  /* Type scale */
+  --text-2xs:  0.6875rem;
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-md:   1.125rem;
+  --text-lg:   1.375rem;
+  --text-xl:   1.75rem;
+  --text-2xl:  2.25rem;
+  --text-3xl:  3rem;
+  --text-4xl:  4rem;
+  --text-5xl:  5.5rem;
+
+  /* Weights */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Line heights */
+  --leading-tight:   1.08;
+  --leading-snug:    1.22;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.7;
+
+  /* Letter spacing */
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-eyebrow: 0.16em;
+
+  /* Effects */
+  --glow-sm:  0 0 10px rgba(248, 222, 34, 0.45);
+  --shadow-sm:  0 1px 2px rgba(4, 4, 20, 0.40);
+  --shadow-md:  0 6px 18px rgba(4, 4, 20, 0.45);
+  --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+@font-face {
+  font-family: 'Noto Serif EP';
+  src: url('../assets/fonts/NotoSerifOriya-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto EP';
+  src: url('../assets/fonts/Roboto-Italic-VariableFont.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+.ep-starfield {
+  background-color: var(--map-canvas);
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 22%, rgba(255,251,227,0.9), transparent 60%),
+    radial-gradient(1.2px 1.2px at 78% 16%, rgba(255,251,227,0.8), transparent 60%),
+    radial-gradient(1.6px 1.6px at 34% 64%, rgba(248,222,34,0.9),  transparent 60%),
+    radial-gradient(1px 1px   at 62% 48%, rgba(255,251,227,0.7), transparent 60%),
+    radial-gradient(1.3px 1.3px at 88% 72%, rgba(255,251,227,0.8), transparent 60%),
+    radial-gradient(1px 1px   at 22% 84%, rgba(255,251,227,0.6), transparent 60%),
+    radial-gradient(1.1px 1.1px at 52% 12%, rgba(255,251,227,0.7), transparent 60%),
+    radial-gradient(1.5px 1.5px at 8% 56%,  rgba(250,154,244,0.7), transparent 60%);
+  background-repeat: repeat;
+  background-size: 320px 320px;
+}

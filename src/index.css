@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import "tailwindcss";
+@import "./styles/design-system.css";
+@import "./components/Loading.css";
+
+@keyframes ep-star-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.ep-star-focus {
+  animation: ep-star-pulse 2s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+@keyframes ep-star-spark {
+  0% { transform: scale(0.4); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+@keyframes ep-star-spark-ring {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.star-collect-spark {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.star-collect-spark::before,
+.star-collect-spark::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 120px;
+  height: 120px;
+  margin: -60px 0 0 -60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(248, 222, 34, 0.55) 0%, transparent 70%);
+  animation: ep-star-spark 1.4s ease-out forwards;
+}
+
+.star-collect-spark::after {
+  width: 160px;
+  height: 160px;
+  margin: -80px 0 0 -80px;
+  background: transparent;
+  border: 2px solid rgba(248, 222, 34, 0.6);
+  animation: ep-star-spark-ring 1.6s ease-out 0.15s forwards;
+}
+
+.star-collect-feedback {
+  animation: ep-complete-pop 0.5s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+@keyframes ep-complete-pop {
+  0% { opacity: 0; transform: scale(0.92) translateY(8px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.ep-complete-pop {
+  animation: ep-complete-pop 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
