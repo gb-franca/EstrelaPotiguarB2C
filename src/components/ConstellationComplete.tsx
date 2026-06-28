@@ -134,162 +134,168 @@ export default function ConstellationComplete({
       <div className="stars ep-starfield absolute inset-0 opacity-50 pointer-events-none" />
 
       {/* Left: gamified summary */}
-      <div className="w-full md:w-1/2 p-6 pb-24 md:pb-6 relative z-10 pt-8 md:overflow-y-auto">
-        <div className="max-w-md mx-auto text-center">
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 ep-complete-pop"
-            style={{ backgroundColor: 'var(--accent-soft)', border: '1px solid var(--accent)', color: 'var(--accent)' }}
-          >
-            <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-              Constelação formada!
-            </span>
-          </div>
-
-          <h2
-            className="mb-2"
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'var(--text-2xl)',
-              fontWeight: 'var(--weight-bold)',
-              lineHeight: 'var(--leading-tight)',
-            }}
-          >
-            {constellationName}
-          </h2>
-          <p className="mb-1" style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-md)' }}>
-            {roadmapName}
-          </p>
-          <p className="mb-8" style={{ color: 'var(--text-muted)', fontSize: 'var(--text-sm)' }}>
-            Você iluminou {stops.length} estrelas pelo céu potiguar
-          </p>
-
-          {/* Abstract constellation preview */}
-          <div
-            className="relative mx-auto mb-8 rounded-2xl border overflow-hidden ep-complete-pop"
-            style={{
-              backgroundColor: 'var(--surface-card)',
-              borderColor: 'var(--border-subtle)',
-              boxShadow: 'var(--glow-sm)',
-              maxWidth: 280,
-              aspectRatio: '1',
-            }}
-          >
-            <svg viewBox="0 0 100 100" className="w-full h-full">
-              <defs>
-                <filter id="constellation-glow">
-                  <feGaussianBlur stdDeviation="1.2" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              <polyline
-                points={linePath}
-                fill="none"
-                stroke="#f8de22"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                opacity="0.85"
-                filter="url(#constellation-glow)"
-              />
-              {projected.map((point, i) => (
-                <g key={stops[i].id} transform={`translate(${point.x}, ${point.y})`}>
-                  <circle r="6" fill="rgba(248,222,34,0.15)" />
-                  <circle r="2.5" fill={VARIANT_STROKE[stops[i].variant]} />
-                </g>
-              ))}
-            </svg>
-          </div>
-
-          {/* Gamification stats */}
-          <div className="grid grid-cols-3 gap-3 mb-8">
-            {[
-              { label: 'Estrelas', value: `${starsCollected}/${totalStars}` },
-              { label: 'Pontos', value: `+${pointsEarned}` },
-              { label: 'Nível', value: getExplorerLevel(starsCollected) },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="p-3 rounded-xl border"
-                style={{ backgroundColor: 'var(--surface-card)', borderColor: 'var(--border-subtle)' }}
-              >
-                <p style={{ fontSize: 'var(--text-lg)', fontWeight: 700, color: 'var(--accent)' }}>{stat.value}</p>
-                <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2 }}>{stat.label}</p>
-              </div>
-            ))}
-          </div>
-
-          {completionBonus > 0 && (
-            <p className="mb-6" style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
-              {starPoints} pts das estrelas + {completionBonus} pts bônus de conclusão
-            </p>
-          )}
-
-          {onRouteFeedback && (
-            <div className="mb-8 text-left">
-              <StarFeedbackForm
-                targetLabel={roadmapName}
-                variant="route"
-                existing={routeFeedback}
-                onSubmit={onRouteFeedback}
-              />
+      <div className="w-full md:w-1/2 p-6 pb-24 md:py-6 md:px-8 relative z-10 pt-8 md:overflow-y-auto md:h-full">
+        <div className="max-w-md md:max-w-xl mx-auto w-full flex flex-col md:min-h-full md:justify-between text-center">
+          <div>
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4 md:mb-3 ep-complete-pop"
+              style={{ backgroundColor: 'var(--accent-soft)', border: '1px solid var(--accent)', color: 'var(--accent)' }}
+            >
+              <span style={{ fontSize: 'var(--text-sm)', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                Constelação formada!
+              </span>
             </div>
-          )}
 
-          {onExploreMore && (
-            <button
-              type="button"
-              onClick={onExploreMore}
-              className="w-full mb-8 py-4 rounded-full font-semibold transition-all duration-200 hover:scale-[1.02] cursor-pointer"
+            <h2
+              className="mb-2 mt-2"
               style={{
-                backgroundColor: 'var(--accent)',
-                color: 'var(--text-on-accent)',
-                fontFamily: 'var(--font-body)',
-                fontSize: 'var(--text-base)',
-                boxShadow: 'var(--glow-sm)',
+                fontFamily: 'var(--font-display)',
+                fontSize: 'var(--text-2xl)',
+                fontWeight: 'var(--weight-bold)',
+                lineHeight: 'var(--leading-tight)',
               }}
             >
-              Explorar mais constelações
-            </button>
-          )}
+              {constellationName}
+            </h2>
+            <p className="mb-1" style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-md)' }}>
+              {roadmapName}
+            </p>
+            <p className="mb-6 md:mb-4" style={{ color: 'var(--text-muted)', fontSize: 'var(--text-sm)' }}>
+              Você iluminou {stops.length} estrelas pelo céu potiguar
+            </p>
 
-          {/* Share */}
-          <p
-            className="mb-4"
-            style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', fontWeight: 600 }}
-          >
-            Compartilhe sua constelação
-          </p>
-          <div className="flex justify-center gap-3">
-            <button
-              type="button"
-              onClick={shareWhatsApp}
-              className="flex items-center gap-2 px-4 py-3 rounded-full cursor-pointer transition-transform hover:scale-105"
-              style={{ backgroundColor: '#25D366', color: '#fff', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', fontWeight: 600 }}
+            {/* Constellation preview + stats — side by side on desktop */}
+            <div className="flex flex-col md:flex-row md:items-center md:justify-center gap-5 md:gap-6 mb-6 md:mb-4">
+              <div
+                className="relative mx-auto md:mx-0 rounded-2xl border overflow-hidden ep-complete-pop flex-shrink-0"
+                style={{
+                  backgroundColor: 'var(--surface-card)',
+                  borderColor: 'var(--border-subtle)',
+                  boxShadow: 'var(--glow-sm)',
+                  width: '100%',
+                  maxWidth: 240,
+                  aspectRatio: '1',
+                }}
+              >
+                <svg viewBox="0 0 100 100" className="w-full h-full">
+                  <defs>
+                    <filter id="constellation-glow">
+                      <feGaussianBlur stdDeviation="1.2" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <polyline
+                    points={linePath}
+                    fill="none"
+                    stroke="#f8de22"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity="0.85"
+                    filter="url(#constellation-glow)"
+                  />
+                  {projected.map((point, i) => (
+                    <g key={stops[i].id} transform={`translate(${point.x}, ${point.y})`}>
+                      <circle r="6" fill="rgba(248,222,34,0.15)" />
+                      <circle r="2.5" fill={VARIANT_STROKE[stops[i].variant]} />
+                    </g>
+                  ))}
+                </svg>
+              </div>
+
+              <div className="grid grid-cols-3 md:grid-cols-1 gap-3 md:gap-2.5 md:w-36 md:flex-shrink-0">
+                {[
+                  { label: 'Estrelas', value: `${starsCollected}/${totalStars}` },
+                  { label: 'Pontos', value: `+${pointsEarned}` },
+                  { label: 'Nível', value: getExplorerLevel(starsCollected) },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="p-3 md:px-4 md:py-2.5 rounded-xl border"
+                    style={{ backgroundColor: 'var(--surface-card)', borderColor: 'var(--border-subtle)' }}
+                  >
+                    <p style={{ fontSize: 'var(--text-lg)', fontWeight: 700, color: 'var(--accent)' }}>{stat.value}</p>
+                    <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginTop: 2 }}>{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {completionBonus > 0 && (
+              <p className="mb-4 md:mb-3" style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
+                {starPoints} pts das estrelas + {completionBonus} pts bônus de conclusão
+              </p>
+            )}
+
+            {onRouteFeedback && (
+              <div className="mb-4 md:mb-3 text-left">
+                <StarFeedbackForm
+                  targetLabel={roadmapName}
+                  variant="route"
+                  existing={routeFeedback}
+                  onSubmit={onRouteFeedback}
+                />
+              </div>
+            )}
+
+            {onExploreMore && (
+              <button
+                type="button"
+                onClick={onExploreMore}
+                className="w-full mb-6 md:mb-4 py-4 md:py-3 rounded-full font-semibold transition-all duration-200 hover:scale-[1.02] cursor-pointer"
+                style={{
+                  backgroundColor: 'var(--accent)',
+                  color: 'var(--text-on-accent)',
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 'var(--text-base)',
+                  boxShadow: 'var(--glow-sm)',
+                }}
+              >
+                Explorar mais constelações
+              </button>
+            )}
+          </div>
+
+          {/* Share — pinned toward bottom on desktop */}
+          <div className="md:mt-auto md:pt-2">
+            <p
+              className="mb-3 md:mb-2"
+              style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', fontWeight: 600 }}
             >
-              <MessageCircle size={18} />
-              WhatsApp
-            </button>
-            <button
-              type="button"
-              onClick={shareTwitter}
-              className="flex items-center gap-2 px-4 py-3 rounded-full cursor-pointer transition-transform hover:scale-105"
-              style={{ backgroundColor: 'var(--surface-raised)', color: 'var(--text-primary)', border: '1px solid var(--border-subtle)', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', fontWeight: 600 }}
-            >
-              <Share2 size={18} />
-              X
-            </button>
-            <button
-              type="button"
-              onClick={copyShare}
-              className="flex items-center gap-2 px-4 py-3 rounded-full cursor-pointer transition-transform hover:scale-105"
-              style={{ backgroundColor: 'var(--surface-card)', color: 'var(--text-primary)', border: '1px solid var(--border-subtle)', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', fontWeight: 600 }}
-            >
-              {copied ? <Check size={18} style={{ color: 'var(--mare)' }} /> : <Copy size={18} />}
-              {copied ? 'Copiado!' : 'Copiar'}
-            </button>
+              Compartilhe sua constelação
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              <button
+                type="button"
+                onClick={shareWhatsApp}
+                className="flex items-center gap-2 px-4 py-3 rounded-full cursor-pointer transition-transform hover:scale-105"
+                style={{ backgroundColor: '#25D366', color: '#fff', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', fontWeight: 600 }}
+              >
+                <MessageCircle size={18} />
+                WhatsApp
+              </button>
+              <button
+                type="button"
+                onClick={shareTwitter}
+                className="flex items-center gap-2 px-4 py-3 rounded-full cursor-pointer transition-transform hover:scale-105"
+                style={{ backgroundColor: 'var(--surface-raised)', color: 'var(--text-primary)', border: '1px solid var(--border-subtle)', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', fontWeight: 600 }}
+              >
+                <Share2 size={18} />
+                X
+              </button>
+              <button
+                type="button"
+                onClick={copyShare}
+                className="flex items-center gap-2 px-4 py-3 rounded-full cursor-pointer transition-transform hover:scale-105"
+                style={{ backgroundColor: 'var(--surface-card)', color: 'var(--text-primary)', border: '1px solid var(--border-subtle)', fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', fontWeight: 600 }}
+              >
+                {copied ? <Check size={18} style={{ color: 'var(--mare)' }} /> : <Copy size={18} />}
+                {copied ? 'Copiado!' : 'Copiar'}
+              </button>
+            </div>
           </div>
         </div>
       </div>
